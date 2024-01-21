@@ -48,3 +48,4 @@ while processingDate <= today:
 
 
 
+##TODO if file already exist check date, if date superior to date in filename +1 then don't download
