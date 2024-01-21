@@ -31,7 +31,7 @@ while processingDate <= today:
     fileName = monthStringWithLeadingZero+"-"+dayStringWithLeadingZero+"-"+yearString+".json"
     print("fileName =", fileName)
     #determine filePath
-    jsonPath = 'json/'+fileName
+    jsonPath = '../json/'+fileName
     jsonPath = os.path.join(os.path.dirname(__file__), jsonPath)
     print("filePath =",jsonPath)
     print("Downloading json from ",urlToProcess)

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-test_client_id = os.getenv('test_client_secret')
+test_client_id = os.getenv('test_client_id')
 test_client_secret = os.getenv('test_client_secret')
 
 ctx = ClientContext("https://hidroplatanar-my.sharepoint.com/personal/charles_hidroplatanar_com/").with_client_credentials(
@@ -36,7 +36,7 @@ for file in files:
     file_url = file.serverRelativeUrl
     fileName = file.name
     print("URL: {0}".format(file_url))
-    excelPath = 'excel/'+fileName
+    excelPath = '../excel/'+fileName
     excelPath = os.path.join(os.path.dirname(__file__), excelPath)
     with open(excelPath, "wb") as local_file:
         file = (
@@ -45,3 +45,5 @@ for file in files:
             .execute_query()
         )
     print("[Ok] file has been downloaded into: {0}".format(excelPath))
+
+#TODO don't download if file already exists
