@@ -1,5 +1,4 @@
 .env
-./src/secrets/
 src/test-ice-app/json/01-01-2024.json
 src/secrets/hidroplatanar.cer
 src/secrets/hidroplatanar.pem
@@ -7,26 +6,5 @@ src/secrets/hidroplatanar.pfx
 src/secrets/secrets.txt
 src/experiments/create-cert.ps1
 src/extract-from-image/test.jpeg
-src/json/01-18-2024.json
-src/excel/Performance Report for 2024-01-14.xlsx
-src/excel/Performance Report for 2024-01-15.xlsx
-src/excel/Performance Report for 2024-01-16.xlsx
-src/excel/Performance Report for 2024-01-17.xlsx
-src/excel/Performance Report for 2024-01-18.xlsx
-src/json/01-01-2024.json
-src/json/01-02-2024.json
-src/json/01-03-2024.json
-src/json/01-04-2024.json
-src/json/01-05-2024.json
-src/json/01-06-2024.json
-src/json/01-07-2024.json
-src/json/01-08-2024.json
-src/json/01-09-2024.json
-src/json/01-10-2024.json
-src/json/01-11-2024.json
-src/json/01-12-2024.json
-src/json/01-13-2024.json
-src/json/01-14-2024.json
-src/json/01-15-2024.json
-src/json/01-16-2024.json
-src/json/01-17-2024.json
+excel/
+json/
