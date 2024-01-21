@@ -46,4 +46,3 @@ for file in files:
         )
     print("[Ok] file has been downloaded into: {0}".format(excelPath))
 
-#TODO don't download if file already exists

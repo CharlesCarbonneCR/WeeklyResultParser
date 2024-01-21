@@ -45,7 +45,3 @@ while processingDate <= today:
     jsonFile.close()
     # add a day then loop
     processingDate = processingDate + timedelta(days=1)
-
-
-
-##TODO if file already exist check date, if date superior to date in filename +1 then don't download
