@@ -1,10 +1,7 @@
 .env
 src/test-ice-app/json/01-01-2024.json
-src/secrets/hidroplatanar.cer
-src/secrets/hidroplatanar.pem
-src/secrets/hidroplatanar.pfx
-src/secrets/secrets.txt
 src/experiments/create-cert.ps1
 src/extract-from-image/test.jpeg
 excel/
 json/
+secrets/
