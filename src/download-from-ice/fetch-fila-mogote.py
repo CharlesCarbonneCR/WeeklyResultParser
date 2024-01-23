@@ -65,61 +65,70 @@ for data in sorted_list_by_date:
     # print('planta=',dataObject.planta)
     # print('grupo=',dataObject.grupo)
 
-###Buildup total per day:
-#Get todays date:
-today = date.today()
-#Get start of month date
-startMonth = today.replace(day=1)
-print("start month = ", startMonth)
-print("Today's date:", today)
-#set processingDate
-processingDate = startMonth
-datoTotal = float()
-total_usd = float()
-average_usd = float()
-daysTotal = 0
-while (processingDate <= today and processingDate.month == today.month and processingDate.day < (today.day -1) and processingDate.year == today.year):
-    print("###############")
-    print("processingDate =", processingDate)
-    dayString = str(processingDate.day)
-    dayStringWithLeadingZero = str(processingDate.strftime("%d"))
-    monthString = str(processingDate.month)
-    monthStringWithLeadingZero = str(processingDate.strftime("%m"))
-    yearString = str(processingDate.year)
-    dataByDate = []
-    datoTotalByDate = []
-    for data in sorted_list_by_date:
-        if (data.fecha.day == processingDate.day 
-            and data.fecha.month == processingDate.month 
-            and data.fecha.year == processingDate.year):
-            dataByDate.append(data)
-            datoTotalByDate.append(data.dato)
-    # get number of elements in datoTotalByDateFloat should be 24:
-    print("total elements (should be 24) :", len(datoTotalByDate))
-    datoTotalByDateFloat = math.fsum(datoTotalByDate)
-    print("dato total for date "+dayString+"/"+monthString+"/"+yearString+": "+str(datoTotalByDateFloat))
-    total_usd_by_date = calculateTotalUsd(processingDate, datoTotalByDateFloat)
-    print("Total USD = for date "+dayString+"/"+monthString+"/"+yearString+": "+str(total_usd_by_date))
-    tmpList = []
-    tmpList.append(datoTotalByDateFloat)
-    tmpList.append(datoTotal)
-    datoTotal = math.fsum(tmpList)
-    tmpListUSD = []
-    tmpListUSD.append(total_usd_by_date)
-    tmpListUSD.append(total_usd)
-    total_usd = math.fsum(tmpListUSD)
-    print("total MW produced on month "+monthString+" :", datoTotal)
-    print("total usd produced on month "+monthString+" :", total_usd)
-    # add a day then loop
-    daysTotal = daysTotal+1
-    processingDate = processingDate + timedelta(days=1)
+###Buildup total per day on a defined month:
+def totalPerDayOnSpecificMonth(month):
+    #TODO : Add check if specified month exist
+    #Get todays date if today is in defined month:
+    if date.today().month == int(month):
+        today = date.today()
+    else:
+        today = date.today()
+        today = today.replace(day=1, month=month)
+    print(today)
+    #Get start of month date
+    startMonth = today.replace(day=1)
+    print("start month = ", startMonth)
+    print("Today's date:", today)
+    #set processingDate
+    processingDate = startMonth
+    datoTotal = float()
+    total_usd = float()
+    average_usd = float()
+    daysTotal = 0
+    while (processingDate <= today and processingDate.month == today.month and processingDate.day < (today.day) and processingDate.year == today.year):
+        print("###############")
+        print("processingDate =", processingDate)
+        dayString = str(processingDate.day)
+        dayStringWithLeadingZero = str(processingDate.strftime("%d"))
+        monthString = str(processingDate.month)
+        monthStringWithLeadingZero = str(processingDate.strftime("%m"))
+        yearString = str(processingDate.year)
+        dataByDate = []
+        datoTotalByDate = []
+        for data in sorted_list_by_date:
+            if (data.fecha.day == processingDate.day 
+                and data.fecha.month == processingDate.month 
+                and data.fecha.year == processingDate.year):
+                dataByDate.append(data)
+                datoTotalByDate.append(data.dato)
+        # get number of elements in datoTotalByDateFloat should be 24:
+        print("total elements (should be 24) :", len(datoTotalByDate))
+        datoTotalByDateFloat = math.fsum(datoTotalByDate)
+        print("dato total for date "+dayString+"/"+monthString+"/"+yearString+": "+str(datoTotalByDateFloat))
+        total_usd_by_date = calculateTotalUsd(processingDate, datoTotalByDateFloat)
+        print("Total USD = for date "+dayString+"/"+monthString+"/"+yearString+": "+str(total_usd_by_date))
+        tmpList = []
+        tmpList.append(datoTotalByDateFloat)
+        tmpList.append(datoTotal)
+        datoTotal = math.fsum(tmpList)
+        tmpListUSD = []
+        tmpListUSD.append(total_usd_by_date)
+        tmpListUSD.append(total_usd)
+        total_usd = math.fsum(tmpListUSD)
+        print("total MW produced on month "+monthString+" :", datoTotal)
+        print("total usd produced on month "+monthString+" :", total_usd)
+        # add a day then loop
+        daysTotal = daysTotal+1
+        processingDate = processingDate + timedelta(days=1)
 
- ###DIsplay totals
-average_usd = total_usd / float(daysTotal)
-print("#### TOTALS :")
-print("TOTAL MWh produced :", datoTotal)
-print("TOTAL USD : ",total_usd)
-print("AVERAGE USD :", average_usd)
-print("NUMBER OF DAYS IN THE CALCULATION :", daysTotal)
-proj = float(average_usd) * float(processingDate.max.day)
-print("Projection for the month based on the average and "+str(processingDate.max.day)+" days", proj)
+    ###DIsplay totals
+    average_usd = total_usd / float(daysTotal)
+    print("#### TOTALS :")
+    print("TOTAL MWh produced :", datoTotal)
+    print("TOTAL USD : ",total_usd)
+    print("AVERAGE USD :", average_usd)
+    print("NUMBER OF DAYS IN THE CALCULATION :", daysTotal)
+    proj = float(average_usd) * float(processingDate.max.day)
+    print("Projection for the month based on the average and "+str(processingDate.max.day)+" days", proj)
+
+totalPerDayOnSpecificMonth(1)
