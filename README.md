@@ -2,8 +2,10 @@
 Goal of the project is to parse daily data from Wind Turbines in Fila de Mogote
 
 
-TODO => in ICE script if file already exist check date, if date superior to date in filename +1 then don't 
+##Todos
+
+TODO => in **download-daily-json.py** if file already exist check date, if date superior to date in filename +1 then don't download 
 
 TODO => for both scripts check if folder exist if not create it
 
-TODO => in excel script don't download if file already exists
+TODO => in **download-from-onedrive.py** don't download if file already exists

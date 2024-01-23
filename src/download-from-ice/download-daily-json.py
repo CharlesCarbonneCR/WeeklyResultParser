@@ -15,8 +15,8 @@ print("Today's date:", today)
 #set processingDate
 processingDate = startMonth
 
-#Loop for each day untill today
-while processingDate <= today:
+#Loop for each day untill today -1 because today data is not complete!
+while processingDate <= today and processingDate.day <= (today.day - 1):
     print("###############")
     print("processingDate =", processingDate)
     dayString = str(processingDate.day)
@@ -34,14 +34,19 @@ while processingDate <= today:
     jsonPath = '../json/'+fileName
     jsonPath = os.path.join(os.path.dirname(__file__), jsonPath)
     print("filePath =",jsonPath)
-    print("Downloading json from ",urlToProcess)
-    with urllib.request.urlopen(urlToProcess) as url:
-        data = json.load(url)
-    #Write data to file
-    print("Writing json to file ", jsonPath)
-    jsonFile = open(jsonPath, "w")
-    jsonString = json.dumps(data)
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    print("### check if file exists ###")
+    if os.path.isfile(jsonPath):
+        print("file : "+fileName+" already exists")
+    else: 
+        print("file : "+fileName+" does not exists")
+        print("Downloading json from ",urlToProcess)
+        with urllib.request.urlopen(urlToProcess) as url:
+            data = json.load(url)
+        #Write data to file
+        print("Writing json to file ", jsonPath)
+        jsonFile = open(jsonPath, "w")
+        jsonString = json.dumps(data)
+        jsonFile.write(jsonString)
+        jsonFile.close()
     # add a day then loop
     processingDate = processingDate + timedelta(days=1)

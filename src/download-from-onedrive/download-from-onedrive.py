@@ -1,7 +1,5 @@
 from office365.sharepoint.client_context import ClientContext
 import os
-import dotenv
-
 from dotenv import load_dotenv
 
 load_dotenv()
